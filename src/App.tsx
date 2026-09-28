@@ -47,39 +47,51 @@ export default function App() {
 		<div className="min-h-screen bg-gray-950 text-white">
 			{/* Header */}
 			<header className="sticky top-0 z-10 border-b border-white/10 bg-gray-950/90 backdrop-blur-sm">
-				<div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-3">
-					<h1 className="text-base font-semibold text-white shrink-0">
-						Movie Collection
-					</h1>
-					<input
-						type="search"
-						placeholder="Search titles…"
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
-						className="flex-1 min-w-0 rounded-lg bg-white/10 px-3 py-1.5 text-sm text-white placeholder:text-white/30 outline-none focus:ring-1 focus:ring-white/20"
-					/>
-					<button
-						type="button"
-						onClick={() => setFiltersOpen((v) => !v)}
-						className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
-							hasActiveFilters || filtersOpen
-								? "bg-white text-gray-950"
-								: "bg-white/10 text-white/60 hover:bg-white/15"
-						}`}
-					>
-						Filter{hasActiveFilters ? " •" : ""}
-					</button>
+				<div className="mx-auto max-w-5xl px-4 pt-3 pb-2">
+					{/* Title — full width row on mobile, inline on sm+ */}
+					<div className="flex items-center gap-3 sm:hidden mb-2">
+						<h1 className="text-sm font-semibold text-white/70 tracking-wide uppercase text-xs">
+							Movie Collection
+						</h1>
+						<span className="text-xs text-white/30">
+							{movies.length} titles
+						</span>
+					</div>
+
+					<div className="flex items-center gap-2">
+						<h1 className="hidden sm:block text-base font-semibold text-white shrink-0">
+							Movie Collection
+						</h1>
+						<input
+							type="search"
+							placeholder="Search…"
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}
+							className="flex-1 min-w-0 rounded-xl bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:bg-white/15"
+						/>
+						<button
+							type="button"
+							onClick={() => setFiltersOpen((v) => !v)}
+							className={`shrink-0 rounded-xl px-3 py-2 text-xs font-medium transition-colors ${
+								hasActiveFilters || filtersOpen
+									? "bg-white text-gray-950"
+									: "bg-white/10 text-white/60"
+							}`}
+						>
+							{hasActiveFilters ? "Filter •" : "Filter"}
+						</button>
+					</div>
 				</div>
 
 				{filtersOpen && (
-					<div className="mx-auto max-w-5xl px-4 pb-3">
+					<div className="mx-auto max-w-5xl px-4 pb-3 pt-1 border-t border-white/5 mt-1">
 						<FilterPanel filters={filters} onChange={setFilters} />
 					</div>
 				)}
 			</header>
 
 			{/* Content */}
-			<main className="mx-auto max-w-5xl px-4 py-6">
+			<main className="mx-auto max-w-5xl px-3 py-4">
 				{isLoading && (
 					<p className="text-center text-sm text-white/40 py-20">Loading…</p>
 				)}
@@ -94,16 +106,11 @@ export default function App() {
 					</p>
 				)}
 				{!isLoading && !isError && filtered.length > 0 && (
-					<>
-						<p className="mb-4 text-xs text-white/30">
-							{filtered.length} title{filtered.length === 1 ? "" : "s"}
-						</p>
-						<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-							{filtered.map((m) => (
-								<MovieCard key={m.id} movie={m} />
-							))}
-						</div>
-					</>
+					<div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+						{filtered.map((m) => (
+							<MovieCard key={m.id} movie={m} />
+						))}
+					</div>
 				)}
 			</main>
 		</div>
