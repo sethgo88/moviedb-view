@@ -18,10 +18,10 @@ function Chip({
 		<button
 			type="button"
 			onClick={onClick}
-			className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+			className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
 				active
-					? "bg-white text-gray-950"
-					: "bg-white/10 text-white/60 hover:bg-white/15"
+					? "border-blue-500 bg-blue-600 text-white"
+					: "border-white/15 bg-white/5 text-white/60 hover:bg-white/10"
 			}`}
 		>
 			{children}
@@ -41,7 +41,7 @@ export function FilterPanel({ filters, onChange }: Props) {
 						active={filters.status === s}
 						onClick={() => onChange({ ...filters, status: s })}
 					>
-						{s === "ALL" ? "All" : s === "OWNED" ? "Owned" : "Wanted"}
+						{s === "ALL" ? "All" : s === "OWNED" ? "Own" : "Want"}
 					</Chip>
 				))}
 			</div>
