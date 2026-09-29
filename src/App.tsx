@@ -47,10 +47,10 @@ export default function App() {
 		<div className="min-h-screen bg-gray-950 text-white">
 			{/* Header */}
 			<header className="sticky top-0 z-10 border-b border-white/10 bg-gray-950/90 backdrop-blur-sm">
-				<div className="mx-auto max-w-5xl px-4 pt-3 pb-2">
+				<div className="mx-auto max-w-5xl px-5 pt-4 pb-3">
 					{/* Title — full width row on mobile, inline on sm+ */}
 					<div className="flex items-center gap-3 sm:hidden mb-2">
-						<h1 className="text-sm font-semibold text-white/70 tracking-wide uppercase text-xs">
+						<h1 className="text-sm font-semibold text-white/70 tracking-wide uppercase">
 							Movie Collection
 						</h1>
 						<span className="text-xs text-white/30">
@@ -67,14 +67,14 @@ export default function App() {
 							placeholder="Search…"
 							value={search}
 							onChange={(e) => setSearch(e.target.value)}
-							className="flex-1 min-w-0 rounded-xl bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:bg-white/15"
+							className="flex-1 min-w-0 min-h-[48px] rounded-lg bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 outline-none focus:bg-white/15"
 						/>
 						<button
 							type="button"
 							onClick={() => setFiltersOpen((v) => !v)}
-							className={`shrink-0 rounded-xl px-3 py-2 text-xs font-medium transition-colors ${
+							className={`shrink-0 min-h-[48px] rounded-lg px-5 text-xs font-semibold transition-colors ${
 								hasActiveFilters || filtersOpen
-									? "bg-white text-gray-950"
+									? "bg-blue-600 text-white"
 									: "bg-white/10 text-white/60"
 							}`}
 						>
@@ -84,14 +84,14 @@ export default function App() {
 				</div>
 
 				{filtersOpen && (
-					<div className="mx-auto max-w-5xl px-4 pb-3 pt-1 border-t border-white/5 mt-1">
+					<div className="mx-auto max-w-5xl px-5 pb-4 pt-2 border-t border-white/5 mt-1">
 						<FilterPanel filters={filters} onChange={setFilters} />
 					</div>
 				)}
 			</header>
 
 			{/* Content */}
-			<main className="mx-auto max-w-5xl px-3 py-4">
+			<main className="mx-auto max-w-5xl px-5 py-5">
 				{isLoading && (
 					<p className="text-center text-sm text-white/40 py-20">Loading…</p>
 				)}
@@ -106,7 +106,7 @@ export default function App() {
 					</p>
 				)}
 				{!isLoading && !isError && filtered.length > 0 && (
-					<div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+					<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
 						{filtered.map((m) => (
 							<MovieCard key={m.id} movie={m} />
 						))}
